@@ -145,9 +145,6 @@ class _TimesSlotGridViewFromIntervalState
   }
 
   double convertTimeOfDayToDoubel(TimeOfDay timeOfDay) {
-    print("convertTimeOfDayToDoubel");
-    print("convertTimeOfDayToDoubel : ${timeOfDay.hour}.${timeOfDay.minute}");
-    print(double.parse("${timeOfDay.hour}.${timeOfDay.minute}"));
     return double.parse("${timeOfDay.hour}.${timeOfDay.minute}");
   }
 }

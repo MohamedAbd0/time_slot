@@ -1,7 +1,6 @@
 // ignore_for_file: always_use_package_imports
 
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import '../controller/day_part_controller.dart';
 import '../controller/language_controller.dart';
 import 'time_item_card.dart';
