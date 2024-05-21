@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:time_slot/controller/day_part_controller.dart';
-import 'package:time_slot/model/time_slot_Interval.dart';
-import 'package:time_slot/time_slot_from_interval.dart';
-import 'package:time_slot/time_slot_from_list.dart';
+import 'package:time_slot/time_slot.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

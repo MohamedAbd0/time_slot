@@ -1,7 +1,7 @@
 // ignore_for_file: always_use_package_imports
 
-import '../locale/ar.dart';
-import '../locale/en.dart';
+import '../local/ar.dart';
+import '../local/en.dart';
 
 class LocaleController {
   final String locale;

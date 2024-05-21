@@ -1,10 +1,7 @@
 // ignore_for_file: always_use_package_imports
 
 import 'package:flutter/material.dart';
-import 'controller/day_part_controller.dart';
-import 'controller/language_controller.dart';
-import 'model/time_slot_Interval.dart';
-import 'widget/time_slot_grid_view.dart';
+import 'time_slot.dart';
 
 class TimesSlotGridViewFromInterval extends StatefulWidget {
   /// init time to sected.

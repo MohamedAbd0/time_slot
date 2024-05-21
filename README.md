@@ -7,7 +7,7 @@
 
 Demo gif
 -----
-![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/demo.gif)
+![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/demo.gif?raw=true)
 
 
 
@@ -62,7 +62,7 @@ TimesSlotGridViewFromInterval
 -
 to build time slot grid view from interval (10:00 AM to 10:00 PM) every hour
 
-![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromInterval.png)
+![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromInterval.png?raw=true)
 
 
 ```dart
@@ -107,7 +107,7 @@ TimesSlotGridViewFromList
 -
 to build time slot grid view from list date.
 
-![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromList.png)
+![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromList.png?raw=true)
 
 
 ```dart
@@ -155,5 +155,3 @@ locale = "ar",
 ```
 
 
-## Contributions
-Contributions of any kind are more than welcome! Feel free to fork and improve international_phone_input in any way you want, make a pull request, or open an issue.
