@@ -122,20 +122,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 initTime: selectTime,
                 crossAxisCount: 4,
                 multiSelection: true,
+                mainAxisSpacing: 20,
                 timeSlotInterval: const TimeSlotInterval(
                   start: TimeOfDay(hour: 10, minute: 00),
                   end: TimeOfDay(hour: 22, minute: 0),
                   interval: Duration(hours: 1, minutes: 0),
                 ),
+                displayType: DisplayType.groupingWitoutDisplayDayPart,
                 onChange: (value) {
                   setState(() {
                     selectTime = value;
                   });
-
-                  print(selectTime
-                      .map((item) => item.toString())
-                      .toList()
-                      .join('\n'));
                 },
               ),
               const Text("-------------- AR --------------"),

@@ -73,6 +73,34 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
   /// ```
   final bool multiSelection;
 
+  /// to allow sellect the formating of display shapes
+  /// groupingWithDisplayDayPart -> Display by group by day part with display title of day part
+  /// groupingWitoutDisplayDayPart -> Display by group by day part without display title of day part
+  /// ungrouping -> Display all time without grouping
+  ///
+  /// ```dart
+  /// displayDayPart: DisplayType.groupingWithDisplayDayPart, //default value
+  /// ```
+  final DisplayType displayType;
+
+  /// mainAxisSpacing
+  /// ```dart
+  /// mainAxisSpacing: 5, //default value
+  /// ```
+  final double mainAxisSpacing;
+
+  /// crossAxisSpacing
+  /// ```dart
+  /// crossAxisSpacing: 5, //default value
+  /// ```
+  final double crossAxisSpacing;
+
+  /// childAspectRatio
+  /// ```dart
+  /// childAspectRatio: 5, //default value
+  /// ```
+  final double childAspectRatio;
+
   const TimesSlotGridViewFromInterval({
     super.key,
     required this.initTime,
@@ -84,6 +112,10 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
     this.selectedColor,
     this.unSelectedColor,
     this.multiSelection = false,
+    this.displayType = DisplayType.groupingWithDisplayDayPart,
+    this.mainAxisSpacing = 5,
+    this.crossAxisSpacing = 5,
+    this.childAspectRatio = 3,
   });
 
   @override
@@ -147,6 +179,10 @@ class _TimesSlotGridViewFromIntervalState
       selectedColor: widget.selectedColor,
       unSelectedColor: widget.unSelectedColor,
       multiSelection: widget.multiSelection,
+      displayType: widget.displayType,
+      mainAxisSpacing: widget.mainAxisSpacing,
+      crossAxisSpacing: widget.crossAxisSpacing,
+      childAspectRatio: widget.childAspectRatio,
     );
   }
 

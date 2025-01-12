@@ -1,9 +1,6 @@
 // ignore_for_file: always_use_package_imports
-
 import 'package:flutter/material.dart';
-import '../controller/day_part_controller.dart';
-import '../controller/language_controller.dart';
-import 'time_item_card.dart';
+import '../export.dart';
 
 class TimeSlotGridView extends StatefulWidget {
   /// init time to sected.
@@ -71,6 +68,34 @@ class TimeSlotGridView extends StatefulWidget {
   /// ```
   final bool multiSelection;
 
+  /// to allow sellect the formating of display shapes
+  /// groupingWithDayPart -> Display by group by day part with display title of day part
+  /// groupingWitouthDayPart -> Display by group by day part without display title of day part
+  /// ungrouping -> Display all time without grouping
+  ///
+  /// ```dart
+  /// displayDayPart: DisplayType.groupingWithDayPart, //default value
+  /// ```
+  final DisplayType displayType;
+
+  /// mainAxisSpacing
+  /// ```dart
+  /// mainAxisSpacing: 5, //default value
+  /// ```
+  final double mainAxisSpacing;
+
+  /// crossAxisSpacing
+  /// ```dart
+  /// crossAxisSpacing: 5, //default value
+  /// ```
+  final double crossAxisSpacing;
+
+  /// childAspectRatio
+  /// ```dart
+  /// childAspectRatio: 5, //default value
+  /// ```
+  final double childAspectRatio;
+
   const TimeSlotGridView({
     super.key,
     required this.initTime,
@@ -81,7 +106,11 @@ class TimeSlotGridView extends StatefulWidget {
     this.icon,
     this.selectedColor,
     this.unSelectedColor,
-    this.multiSelection = false,
+    required this.multiSelection,
+    required this.displayType,
+    required this.mainAxisSpacing,
+    required this.crossAxisSpacing,
+    required this.childAspectRatio,
   });
 
   @override
@@ -114,60 +143,84 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    if (widget.displayType == DisplayType.groupingWithDisplayDayPart ||
+        widget.displayType == DisplayType.groupingWitoutDisplayDayPart) {
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: slotTimes.keys.length,
+        itemBuilder: (context, index) {
+          final List<DateTime> listTimes =
+              slotTimes[slotTimes.keys.toList()[index]]!;
+          return listTimes.isEmpty
+              ? const SizedBox()
+              : Column(
+                  children: [
+                    widget.displayType == DisplayType.groupingWithDisplayDayPart
+                        ?
+                        // tiltle
+                        ListTile(
+                            title: Text(
+                              localeController!
+                                  .translate(slotTimes.keys.toList()[index]),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            contentPadding: EdgeInsets.zero,
+                          )
+                        : SizedBox(
+                            height: widget.mainAxisSpacing,
+                          ),
+                    _buildTimeGrid(
+                        listTimes: listTimes,
+                        physics: const NeverScrollableScrollPhysics()),
+                  ],
+                );
+        },
+      );
+    } else {
+      List<DateTime> listTimes = [];
+      slotTimes.values.toList().forEach((item) {
+        listTimes.addAll(item);
+      });
+
+      listTimes.sort();
+      return _buildTimeGrid(listTimes: listTimes);
+    }
+  }
+
+  Widget _buildTimeGrid({
+    required List<DateTime> listTimes,
+    ScrollPhysics? physics,
+  }) {
+    return GridView.builder(
+      physics: physics,
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: slotTimes.keys.length,
-      itemBuilder: (context, index) {
-        final List<DateTime> listTimes =
-            slotTimes[slotTimes.keys.toList()[index]]!;
-        return listTimes.isEmpty
-            ? const SizedBox()
-            : Column(
-                children: [
-                  // tiltle
-                  ListTile(
-                    title: Text(
-                      localeController!
-                          .translate(slotTimes.keys.toList()[index]),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    contentPadding: EdgeInsets.zero,
-                  ),
-
-                  GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: widget.crossAxisCount,
-                      crossAxisSpacing: 5.0,
-                      mainAxisSpacing: 5.0,
-                      childAspectRatio: 3,
-                    ),
-                    itemCount: listTimes.length,
-                    itemBuilder: (context, i) {
-                      final DateTime time = listTimes[i];
-
-                      return TimeItemCard(
-                        locale: widget.locale,
-                        selectedColor: widget.selectedColor,
-                        unSelectedColor: widget.unSelectedColor,
-                        icon: widget.icon,
-                        isSelected: checkIsSelected(time),
-                        time: time,
-                        onChange: (value) {
-                          checkSelectTime(value);
-                        },
-                      );
-                    },
-                  )
-                ],
-              );
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: widget.crossAxisCount,
+        crossAxisSpacing: widget.crossAxisSpacing,
+        mainAxisSpacing: widget.mainAxisSpacing,
+        childAspectRatio: widget.childAspectRatio,
+      ),
+      itemCount: listTimes.length,
+      itemBuilder: (context, i) {
+        final DateTime time = listTimes[i];
+        return TimeItemCard(
+          locale: widget.locale,
+          selectedColor: widget.selectedColor,
+          unSelectedColor: widget.unSelectedColor,
+          icon: widget.icon,
+          isSelected: checkIsSelected(time),
+          time: time,
+          onChange: (value) {
+            checkSelectTime(value);
+          },
+        );
       },
     );
   }
 
-  checkSelectTime(DateTime value) {
+  void checkSelectTime(DateTime value) {
     if (widget.multiSelection) {
       setState(() {
         if (selectionTimes.contains(value)) {
