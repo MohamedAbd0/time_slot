@@ -1,18 +1,15 @@
 # time_slot
 
- A new Flutter package which helps in creating time slots with given time interval or list of date times and get day part name of time, and this package allow localization ar and en.
+A new Flutter package which helps in creating time slots with given time interval or list of date times and get day part name of time, and this package allow localization ar and en.
 
 [![Pub Version](https://img.shields.io/pub/v/time_slot?logo=flutter&style=for-the-badge)](https://pub.dev/packages/time_slot)
 
+## Demo gif
 
-Demo gif
------
 ![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/demo.gif?raw=true)
 
+## Installation
 
-
-Installation
------
 1. Add this to your package's `pubspec.yaml` file:
 
 ```yaml
@@ -32,38 +29,43 @@ $ pub get
 import 'package:time_slot/time_slot.dart';
 ```
 
-Features
-----
+## Features
+
 - Creating time slots with given time interval
 - Creating time slots with given list date times
 - Get day part name of time
+- Support for multiple selection
+- Support different display options
 
-Usage
------
-DayPartController 
+## Usage
+
+DayPartController
 ![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/DayPart.png)
 
 ```dart
   DayPartController dayPartController = DayPartController();
 ```
+
 to get day part of time
+
 ```dart
   DayParts dayPart = dayPartController.getDayPartOfTime(
     time: DateTime(2023, 1, 1, 10, 30),
   ); ///  DayParts.morning
 ```
+
 to get day part name from DayParts
+
 ```dart
-  DayParts dayPart = dayPartController.getDayPartName(dayPart: dayPart),); 
+  DayParts dayPart = dayPartController.getDayPartName(dayPart: dayPart),);
   /// morning
 ```
 
-TimesSlotGridViewFromInterval
--
+## TimesSlotGridViewFromInterval
+
 to build time slot grid view from interval (10:00 AM to 10:00 PM) every hour
 
 ![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromInterval.png?raw=true)
-
 
 ```dart
             TimesSlotGridViewFromInterval(
@@ -103,12 +105,11 @@ locale = "ar",
               ),
 ```
 
-TimesSlotGridViewFromList
--
+## TimesSlotGridViewFromList
+
 to build time slot grid view from list date.
 
 ![image](https://github.com/MohamedAbd0/time_slot/blob/main/screenshots/timeSlotFromList.png?raw=true)
-
 
 ```dart
             TimesSlotGridViewFromList(
@@ -153,5 +154,3 @@ locale = "ar",
                 },
               ),
 ```
-
-

@@ -1,7 +1,6 @@
 // ignore_for_file: always_use_package_imports
 
-import '../local/ar.dart';
-import '../local/en.dart';
+import '../export.dart';
 
 class LocaleController {
   final String locale;
@@ -14,6 +13,8 @@ class LocaleController {
       translationText = en[text];
     } else if (locale.toLowerCase().trim() == "ar") {
       translationText = ar[text];
+    } else if (locale.toLowerCase().trim() == "it") {
+      translationText = it[text];
     }
     return translationText ?? text;
   }
