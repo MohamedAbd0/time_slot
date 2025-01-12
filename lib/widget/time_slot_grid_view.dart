@@ -9,9 +9,9 @@ class TimeSlotGridView extends StatefulWidget {
   /// init time to sected.
   ///
   /// ```dart
-  /// initTime: Datetime.now()
+  /// initTime: [Datetime.now()]
   /// ```
-  final DateTime initTime;
+  final List<DateTime> initTime;
 
   /// list of available times
   ///
@@ -20,14 +20,14 @@ class TimeSlotGridView extends StatefulWidget {
   /// ```
   final List<DateTime> listDates;
 
-  /// to get selection time
+  /// to get selections time
   ///
   /// ```dart
-  /// onChange: (selectTime){
+  /// onChange: (List<DateTime>> selectTime){
   /// print(selectTime.toString())
   /// }
   /// ```
-  final ValueChanged<DateTime> onChange;
+  final ValueChanged<List<DateTime>> onChange;
 
   /// locale of time
   /// we have two type 'ar' or 'en'
@@ -64,6 +64,13 @@ class TimeSlotGridView extends StatefulWidget {
   /// ```
   final int crossAxisCount;
 
+  /// to allow  Multi Selection
+  ///
+  /// ```dart
+  /// multiSelection: false, //default value
+  /// ```
+  final bool multiSelection;
+
   const TimeSlotGridView({
     super.key,
     required this.initTime,
@@ -74,6 +81,7 @@ class TimeSlotGridView extends StatefulWidget {
     this.icon,
     this.selectedColor,
     this.unSelectedColor,
+    this.multiSelection = false,
   });
 
   @override
@@ -86,10 +94,15 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
   LocaleController? localeController;
 
   Map<String, List<DateTime>> slotTimes = {};
+
+  List<DateTime> selectionTimes = [];
+
   @override
   void initState() {
     super.initState();
     localeController = LocaleController(locale: widget.locale);
+
+    selectionTimes = [...widget.initTime];
 
     Future.delayed(Duration.zero, () {
       setState(() {
@@ -140,11 +153,10 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
                         selectedColor: widget.selectedColor,
                         unSelectedColor: widget.unSelectedColor,
                         icon: widget.icon,
-                        isSelected: time.hour == widget.initTime.hour &&
-                            time.minute == widget.initTime.minute,
+                        isSelected: checkIsSelected(time),
                         time: time,
                         onChange: (value) {
-                          widget.onChange(value);
+                          checkSelectTime(value);
                         },
                       );
                     },
@@ -153,5 +165,29 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
               );
       },
     );
+  }
+
+  checkSelectTime(DateTime value) {
+    if (widget.multiSelection) {
+      setState(() {
+        if (selectionTimes.contains(value)) {
+          selectionTimes.remove(value);
+        } else {
+          selectionTimes.add(value);
+        }
+      });
+    } else {
+      setState(() {
+        selectionTimes = [value];
+      });
+    }
+    widget.onChange(selectionTimes);
+  }
+
+  bool checkIsSelected(DateTime value) {
+    return selectionTimes
+        .where((item) => item.hour == value.hour && item.minute == value.minute)
+        .toList()
+        .isNotEmpty;
   }
 }

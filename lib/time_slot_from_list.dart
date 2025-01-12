@@ -7,9 +7,9 @@ class TimesSlotGridViewFromList extends StatefulWidget {
   /// init time to sected.
   ///
   /// ```dart
-  /// initTime: Datetime.now()
+  /// initTime: [Datetime.now()]
   /// ```
-  final DateTime initTime;
+  final List<DateTime> initTime;
 
   /// list of available times
   ///
@@ -25,7 +25,7 @@ class TimesSlotGridViewFromList extends StatefulWidget {
   /// print(selectTime.toString())
   /// }
   /// ```
-  final ValueChanged<DateTime> onChange;
+  final ValueChanged<List<DateTime>> onChange;
 
   /// locale of time
   /// we have two type 'ar' or 'en'

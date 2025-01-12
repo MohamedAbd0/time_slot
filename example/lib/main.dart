@@ -38,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime selectTime = DateTime.now();
+  List<DateTime> selectTime = [];
 
   DayPartController dayPartController = DayPartController();
 
@@ -121,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 locale: "en",
                 initTime: selectTime,
                 crossAxisCount: 4,
+                multiSelection: true,
                 timeSlotInterval: const TimeSlotInterval(
                   start: TimeOfDay(hour: 10, minute: 00),
                   end: TimeOfDay(hour: 22, minute: 0),
@@ -130,6 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     selectTime = value;
                   });
+
+                  print(selectTime
+                      .map((item) => item.toString())
+                      .toList()
+                      .join('\n'));
                 },
               ),
               const Text("-------------- AR --------------"),

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'time_slot.dart';
 
 class TimesSlotGridViewFromInterval extends StatefulWidget {
-  /// init time to sected.
+  /// init times to sected.
   ///
   /// ```dart
-  /// initTime: Datetime.now()
+  /// initTime: [Datetime.now()]
   /// ```
-  final DateTime initTime;
+  final List<DateTime> initTime;
 
   /// time slot interval
   ///
@@ -29,7 +29,7 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
   /// print(selectTime.toString())
   /// }
   /// ```
-  final ValueChanged<DateTime> onChange;
+  final ValueChanged<List<DateTime>> onChange;
 
   /// locale of time
   /// we have two type 'ar' or 'en'
@@ -66,6 +66,13 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
   /// ```
   final int crossAxisCount;
 
+  /// to allow  Multi Selection
+  ///
+  /// ```dart
+  /// multiSelection: false, //default value
+  /// ```
+  final bool multiSelection;
+
   const TimesSlotGridViewFromInterval({
     super.key,
     required this.initTime,
@@ -76,6 +83,7 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
     this.icon,
     this.selectedColor,
     this.unSelectedColor,
+    this.multiSelection = false,
   });
 
   @override
@@ -138,6 +146,7 @@ class _TimesSlotGridViewFromIntervalState
       icon: widget.icon,
       selectedColor: widget.selectedColor,
       unSelectedColor: widget.unSelectedColor,
+      multiSelection: widget.multiSelection,
     );
   }
 
