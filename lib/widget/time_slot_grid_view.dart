@@ -96,6 +96,25 @@ class TimeSlotGridView extends StatefulWidget {
   /// ```
   final double childAspectRatio;
 
+  /// Color for disabled time section
+  /// ```dart
+  /// disabledColor: Colors.white,
+  /// ```
+  final Color? disabledColor;
+
+  /// Color for disabled time section text
+  /// ```dart
+  /// disabledTextColor: Colors.white,
+  /// ```
+  final Color? disabledTextColor;
+
+  /// list of disabled times that match timeslots
+  ///
+  /// ```dart
+  /// disabledTimeSlots: [Datetime.now()]
+  /// ```
+  final List<DateTime>? disabledTimeSlots;
+
   const TimeSlotGridView({
     super.key,
     required this.initTime,
@@ -111,6 +130,9 @@ class TimeSlotGridView extends StatefulWidget {
     required this.mainAxisSpacing,
     required this.crossAxisSpacing,
     required this.childAspectRatio,
+    required this.disabledColor,
+    required this.disabledTimeSlots,
+    required this.disabledTextColor,
   });
 
   @override
@@ -209,8 +231,11 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
           locale: widget.locale,
           selectedColor: widget.selectedColor,
           unSelectedColor: widget.unSelectedColor,
+          disabledColor: widget.disabledColor,
+          disabledTextColor: widget.disabledTextColor,
           icon: widget.icon,
           isSelected: checkIsSelected(time),
+          isDisabled: checkIsDisabled(time),
           time: time,
           onChange: (value) {
             checkSelectTime(value);
@@ -239,6 +264,13 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
 
   bool checkIsSelected(DateTime value) {
     return selectionTimes
+        .where((item) => item.hour == value.hour && item.minute == value.minute)
+        .toList()
+        .isNotEmpty;
+  }
+
+  bool checkIsDisabled(DateTime value) {
+    return (widget.disabledTimeSlots ?? [])
         .where((item) => item.hour == value.hour && item.minute == value.minute)
         .toList()
         .isNotEmpty;

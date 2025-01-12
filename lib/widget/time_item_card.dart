@@ -11,28 +11,40 @@ class TimeItemCard extends StatelessWidget {
   final Color? selectedColor;
   final Color? unSelectedColor;
   final ValueChanged<DateTime> onChange;
+  final bool isDisabled;
+  final Color? disabledColor;
+  final Color? disabledTextColor;
+
   const TimeItemCard({
     super.key,
     required this.time,
     required this.onChange,
     required this.isSelected,
+    required this.isDisabled,
     required this.locale,
     this.icon,
     this.selectedColor,
     this.unSelectedColor,
+    this.disabledColor,
+    required this.disabledTextColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onChange(time);
-      },
+      onTap: isDisabled
+          ? null
+          : () {
+              onChange(time);
+            },
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected
-              ? selectedColor ?? Theme.of(context).primaryColor
-              : unSelectedColor ?? Colors.white,
+          color: isDisabled
+              ? disabledColor ??
+                  (unSelectedColor ?? Colors.white).withOpacity(0.5)
+              : isSelected
+                  ? selectedColor ?? Theme.of(context).primaryColor
+                  : unSelectedColor ?? Colors.white,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Row(
@@ -54,7 +66,11 @@ class TimeItemCard extends StatelessWidget {
             Text(
               DateFormat.jm(locale).format(time),
               style: TextStyle(
-                color: isSelected ? Colors.white : null,
+                color: isDisabled
+                    ? (disabledTextColor ?? Colors.black.withOpacity(0.5))
+                    : isSelected
+                        ? Colors.white
+                        : null,
               ),
             ),
           ],

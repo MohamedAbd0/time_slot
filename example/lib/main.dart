@@ -129,6 +129,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   interval: Duration(hours: 1, minutes: 0),
                 ),
                 displayType: DisplayType.groupingWitoutDisplayDayPart,
+                disabledTimeSlots: [
+                  DateTime(DateTime.now().year, DateTime.now().month,
+                      DateTime.now().day, 14)
+                ],
                 onChange: (value) {
                   setState(() {
                     selectTime = value;

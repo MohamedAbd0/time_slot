@@ -97,6 +97,25 @@ class TimesSlotGridViewFromList extends StatefulWidget {
   /// ```
   final double childAspectRatio;
 
+  /// Color for disabled time section
+  /// ```dart
+  /// disabledColor: Colors.white,
+  /// ```
+  final Color? disabledColor;
+
+  /// Color for disabled time section text
+  /// ```dart
+  /// disabledTextColor: Colors.white,
+  /// ```
+  final Color? disabledTextColor;
+
+  /// list of disabled times that match timeslots
+  ///
+  /// ```dart
+  /// disabledTimeSlots: [Datetime.now()]
+  /// ```
+  final List<DateTime>? disabledTimeSlots;
+
   const TimesSlotGridViewFromList({
     super.key,
     required this.initTime,
@@ -112,6 +131,9 @@ class TimesSlotGridViewFromList extends StatefulWidget {
     this.mainAxisSpacing = 5,
     this.crossAxisSpacing = 5,
     this.childAspectRatio = 3,
+    this.disabledColor,
+    this.disabledTimeSlots,
+    this.disabledTextColor,
   });
 
   @override
@@ -154,6 +176,9 @@ class _TimesSlotGridViewFromListState extends State<TimesSlotGridViewFromList> {
       mainAxisSpacing: widget.mainAxisSpacing,
       crossAxisSpacing: widget.crossAxisSpacing,
       childAspectRatio: widget.childAspectRatio,
+      disabledColor: widget.disabledColor,
+      disabledTimeSlots: widget.disabledTimeSlots,
+      disabledTextColor: widget.disabledTextColor,
     );
   }
 }
