@@ -1,6 +1,6 @@
 name: time_slot
 description: A new Flutter package which helps in creating time slots with given time interval or list of date times and get day part name of time.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/MohamedAbd0/time_slot
 
 environment:

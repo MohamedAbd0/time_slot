@@ -11,3 +11,8 @@
 
 - adding support for multiple selection
 - adding support different display options
+
+## 1.0.2
+
+- adding support disabled time slots
+- adding dynamic border redius option for time slots card
