@@ -115,6 +115,13 @@ class TimeSlotGridView extends StatefulWidget {
   /// ```
   final List<DateTime>? disabledTimeSlots;
 
+  /// border Radius of slot time card
+  ///
+  /// ```dart
+  /// borderRadius: BorderRadius.circular(5)
+  /// ```
+  final BorderRadiusGeometry? borderRadius;
+
   const TimeSlotGridView({
     super.key,
     required this.initTime,
@@ -133,6 +140,7 @@ class TimeSlotGridView extends StatefulWidget {
     required this.disabledColor,
     required this.disabledTimeSlots,
     required this.disabledTextColor,
+    required this.borderRadius,
   });
 
   @override
@@ -233,6 +241,7 @@ class _TimeSlotGridViewState extends State<TimeSlotGridView> {
           unSelectedColor: widget.unSelectedColor,
           disabledColor: widget.disabledColor,
           disabledTextColor: widget.disabledTextColor,
+          borderRadius: widget.borderRadius,
           icon: widget.icon,
           isSelected: checkIsSelected(time),
           isDisabled: checkIsDisabled(time),

@@ -14,6 +14,7 @@ class TimeItemCard extends StatelessWidget {
   final bool isDisabled;
   final Color? disabledColor;
   final Color? disabledTextColor;
+  final BorderRadiusGeometry? borderRadius;
 
   const TimeItemCard({
     super.key,
@@ -26,7 +27,8 @@ class TimeItemCard extends StatelessWidget {
     this.selectedColor,
     this.unSelectedColor,
     this.disabledColor,
-    required this.disabledTextColor,
+    this.disabledTextColor,
+    this.borderRadius,
   });
 
   @override
@@ -45,7 +47,7 @@ class TimeItemCard extends StatelessWidget {
               : isSelected
                   ? selectedColor ?? Theme.of(context).primaryColor
                   : unSelectedColor ?? Colors.white,
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: borderRadius ?? BorderRadius.circular(5),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

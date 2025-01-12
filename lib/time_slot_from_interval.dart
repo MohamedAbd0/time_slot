@@ -120,6 +120,13 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
   /// ```
   final List<DateTime>? disabledTimeSlots;
 
+  /// border Radius of slot time card
+  ///
+  /// ```dart
+  /// borderRadius: BorderRadius.circular(5)
+  /// ```
+  final BorderRadiusGeometry? borderRadius;
+
   const TimesSlotGridViewFromInterval({
     super.key,
     required this.initTime,
@@ -138,6 +145,7 @@ class TimesSlotGridViewFromInterval extends StatefulWidget {
     this.disabledColor,
     this.disabledTimeSlots,
     this.disabledTextColor,
+    this.borderRadius,
   });
 
   @override
@@ -208,6 +216,7 @@ class _TimesSlotGridViewFromIntervalState
       disabledColor: widget.disabledColor,
       disabledTimeSlots: widget.disabledTimeSlots,
       disabledTextColor: widget.disabledTextColor,
+      borderRadius: widget.borderRadius,
     );
   }
 

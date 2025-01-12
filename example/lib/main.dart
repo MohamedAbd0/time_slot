@@ -122,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 initTime: selectTime,
                 crossAxisCount: 4,
                 multiSelection: true,
-                mainAxisSpacing: 20,
+                mainAxisSpacing: 10,
+                borderRadius: BorderRadius.circular(12),
                 timeSlotInterval: const TimeSlotInterval(
                   start: TimeOfDay(hour: 10, minute: 00),
                   end: TimeOfDay(hour: 22, minute: 0),
